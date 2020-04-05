@@ -1,0 +1,19 @@
+.terminal-entry {
+	margin-bottom: 0.8em;
+}
+
+.terminal-input {
+	display: flex;
+}
+
+.terminal-current {
+	flex: 1;
+	border: none;
+	outline: none;
+	font: inherit;
+	margin-top: -1px;
+}
+
+.terminal-prompt:after {
+	content: "\a0";
+}
