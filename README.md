@@ -1,3 +1,3 @@
 # shell.js
 
-draft shell in browser
+draft shell in a browser
