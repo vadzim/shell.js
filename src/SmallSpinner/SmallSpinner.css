@@ -1,0 +1,28 @@
+/*https://loading.io/css/*/
+
+.lds-dual-ring {
+	--color: lightgray;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+}
+
+.lds-dual-ring:after {
+	content: " ";
+	display: block;
+	width: 0.8em;
+	height: 0.8em;
+	border-radius: 50%;
+	border: 0.1em solid var(--color);
+	border-color: var(--color) transparent var(--color) transparent;
+	animation: lds-dual-ring 3s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

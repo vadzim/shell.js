@@ -11,6 +11,8 @@ export class Process<O = string | ArrayBuffer, I = string | ArrayBuffer, E = str
 	#stderrp: Writable
 	#resolve: (x: number) => void
 
+	static get [Symbol.species]() { return Promise }
+
 	constructor(cmd: string) {
 		super(resolve => { _resolve = resolve })
 		// using `var` is a workaround. Typescript allows neither to assign `this.#resolve` within the callback nor to declare `let` variables before super is called.
@@ -36,9 +38,10 @@ export class Process<O = string | ArrayBuffer, I = string | ArrayBuffer, E = str
 
 		void (async () => {
 			await new Promise(resolve => setTimeout(resolve, 800))
-			stdout.write('...aha...')
+			stdout.write('...aha...\n')
 			await new Promise(resolve => setTimeout(resolve, 500))
-			stdout.write('...oho...')
+			stdout.write('...oho...\n')
+			await new Promise(resolve => setTimeout(resolve, 500))
 			stdout.end()
 			stderr.end()
 			stdin.end()
