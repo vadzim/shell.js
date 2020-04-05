@@ -1,5 +1,6 @@
 import React from 'react'
 import { uid } from 'react-uid'
+import { useHandler } from 'react-use-handler'
 import { spawn, Process } from 'Process'
 import { ProcessOutput } from './ProcessOutput'
 import { Prompt } from './Prompt'
@@ -7,6 +8,7 @@ import './Terminal.css'
 
 export const Terminal = ({
 	prompt = '>' as string,
+	maxHistory = 99 as number,
 }) => {
 	type Entry = {
 		cmd: string,
@@ -17,7 +19,21 @@ export const Terminal = ({
 	const [cmd, setCmd] = React.useState("")
 	const input = React.useRef() as React.RefObject<HTMLInputElement>
 
-	React.useEffect(() => { input.current?.focus() })
+	React.useEffect(() => { input.current?.focus() }, [input])
+
+	const runCmd = useHandler((cmd?: string) => {
+		if (!cmd) {
+			return
+		}
+		setEntries(currentEntries => [
+			...currentEntries.slice(-(maxHistory ?? Infinity)),
+			{ cmd, process: spawn<string, string, string | Error>(cmd) },
+		])
+		setCmd('')
+		setTimeout(() => input.current?.scrollIntoView())
+	})
+
+	React.useEffect(() => { runCmd('talk') }, [runCmd])
 
 	return (
 		<div className="terminal">
@@ -29,10 +45,7 @@ export const Terminal = ({
 			))}
 			<form className="terminal-input" onSubmit={e => {
 				e.preventDefault()
-				const cmd = input.current?.value ?? ''
-				setEntries([...entries, { cmd, process: spawn<string, string, string | Error>(cmd) }])
-				setCmd('')
-				setTimeout(() => input.current?.scrollIntoView())
+				runCmd(input.current?.value)
 			}}>
 				<Prompt>{prompt}</Prompt>
 				<input ref={input} className="terminal-current" name="current" value={cmd} onChange={e => setCmd(e.target.value)} />
