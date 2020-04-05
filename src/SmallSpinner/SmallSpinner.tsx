@@ -1,4 +1,4 @@
 import React from "react"
 import "./SmallSpinner.css"
 
-export const SmallSpinner = () => <span className="lds-dual-ring" />
+export const SmallSpinner = ({ className }: { className: string }) => <span className={className+" lds-dual-ring"} />
