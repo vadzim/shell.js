@@ -1,7 +1,6 @@
 import React from "react"
 import { TextNode } from "Terminal/TextNode"
 import { Process } from "Process"
-import { SmallSpinner } from "SmallSpinner"
 import { render } from "util/render"
 import "./ProcessOutput.css"
 
@@ -11,37 +10,22 @@ export const ProcessOutput = React.memo<{ process: Process }>(({ process }) => {
 
 	React.useLayoutEffect(() => {
 		if (process && output) {
+			output.classList.add('terminal-process-output__loading')
 			const containerRef = container.current
-			const spinner = render(<SmallSpinner />, "span")
-			output.appendChild(spinner)
-
-			const moveSpinner = () => {
-				let lastChild: Node = output
-				while (lastChild.lastChild) {
-					lastChild = lastChild.lastChild
-				}
-				if (lastChild.constructor as unknown === HTMLBRElement) {
-					lastChild.parentNode?.insertBefore(spinner, lastChild)
-				} else {
-					output.appendChild(spinner)
-				}
-			}
 
 			const onData = (data: unknown) => {
 				const text = String(data)
-				output.appendChild(render(<TextNode text={text} className="terminal-process-output__data" />, "span"))
-				moveSpinner()
+				output.appendChild(render(<TextNode text={text} className="terminal-process-output__line terminal-process-output__data" brClassName="terminal-process-output__br" />))
 			}
 
 			const onErrorData = (error: unknown) => {
 				const text = (error as any)?.message ?? String(error)
-				output.appendChild(render(<TextNode text={text} className="terminal-process-output__error" />, "span"))
-				moveSpinner()
+				output.appendChild(render(<TextNode text={text} className="terminal-process-output__line terminal-process-output__error" brClassName="terminal-process-output__br" />))
 			}
 
 			process.onData(onData)
 			process.onErrorData(onErrorData)
-			process.finally(() => spinner.parentNode?.removeChild(spinner))
+			process.finally(() => output.classList.remove('terminal-process-output__loading'))
 			containerRef?.appendChild(output)
 
 			return () => {

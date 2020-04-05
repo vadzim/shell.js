@@ -1,2 +1,6 @@
 .terminal-text-node {
 }
+
+.terminal-text-node__br {
+	white-space: pre;
+}

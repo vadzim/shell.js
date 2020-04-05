@@ -1,2 +1,10 @@
-.terminal-process-output {
+.terminal-process-output__loading:empty::after,
+.terminal-process-output__loading .terminal-process-output__line:last-child::after,
+.terminal-process-output__loading .terminal-process-output__br:last-child::before {
+	content: " ";
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	margin-left: 0.3em;
+	background: url('data:image/svg+xml;utf8,<!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL --><svg width="100%" height="100%" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" stroke="gray"><g fill="none" fill-rule="evenodd"><g transform="translate(3 3)" stroke-width="5"><circle stroke-opacity=".3" cx="18" cy="18" r="18"/><path d="M36 18c0-9.94-8.06-18-18-18"><animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/></path></g></g></svg>');
 }
