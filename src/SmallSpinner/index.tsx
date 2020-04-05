@@ -1,1 +1,0 @@
-export { SmallSpinner } from "./SmallSpinner"

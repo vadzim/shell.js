@@ -2,6 +2,7 @@ import React from 'react'
 import { uid } from 'react-uid'
 import { useHandler } from 'react-use-handler'
 import { spawn, Process } from 'Process'
+import { SmoothHeight } from 'SmoothHeight'
 import { ProcessOutput } from './ProcessOutput'
 import { Prompt } from './Prompt'
 import './Terminal.css'
@@ -40,7 +41,9 @@ export const Terminal = ({
 			{entries.map(entry => (
 				<div key={uid(entry)} className="terminal-entry">
 					<div className="terminal-command"><Prompt>{prompt}</Prompt>{entry.cmd}</div>
-					<ProcessOutput process={entry.process}/>
+					<SmoothHeight>
+						<ProcessOutput process={entry.process}/>
+					</SmoothHeight>
 				</div>
 			))}
 			<form className="terminal-input" onSubmit={e => {

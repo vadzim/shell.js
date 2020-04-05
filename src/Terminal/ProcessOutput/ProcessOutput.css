@@ -1,6 +1,8 @@
-.terminal-process-output__loading:empty::after,
-.terminal-process-output__loading .terminal-process-output__line:last-child::after,
-.terminal-process-output__loading .terminal-process-output__br:last-child::before {
+.terminal-process-output {
+	white-space: pre-line;
+}
+
+.terminal-process-output__loading::after {
 	content: " ";
 	display: inline-block;
 	width: 1em;

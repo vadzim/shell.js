@@ -1,5 +1,4 @@
 import React from "react"
-import { TextNode } from "Terminal/TextNode"
 import { Process } from "Process"
 import { render } from "util/render"
 import "./ProcessOutput.css"
@@ -15,12 +14,12 @@ export const ProcessOutput = React.memo<{ process: Process }>(({ process }) => {
 
 			const onData = (data: unknown) => {
 				const text = String(data)
-				output.appendChild(render(<TextNode text={text} className="terminal-process-output__line terminal-process-output__data" brClassName="terminal-process-output__br" />))
+				output.appendChild(render(text))
 			}
 
 			const onErrorData = (error: unknown) => {
 				const text = (error as any)?.message ?? String(error)
-				output.appendChild(render(<TextNode text={text} className="terminal-process-output__line terminal-process-output__error" brClassName="terminal-process-output__br" />))
+				output.appendChild(render(<span className="terminal-process-output__error">{text}</span>))
 			}
 
 			process.onData(onData)
