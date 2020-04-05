@@ -1,13 +1,13 @@
-/*https://loading.io/css/*/
+/* https://loading.io/css/ */
 
-.lds-dual-ring {
+.small-spinner {
 	--color: lightgray;
 	display: inline-block;
 	width: 1em;
 	height: 1em;
 }
 
-.lds-dual-ring:after {
+.small-spinner:after {
 	content: " ";
 	display: block;
 	width: 0.8em;
@@ -15,10 +15,10 @@
 	border-radius: 50%;
 	border: 0.1em solid var(--color);
 	border-color: var(--color) transparent var(--color) transparent;
-	animation: lds-dual-ring 3s linear infinite;
+	animation: small-spinner 3s linear infinite;
 }
 
-@keyframes lds-dual-ring {
+@keyframes small-spinner {
 	0% {
 		transform: rotate(0deg);
 	}
