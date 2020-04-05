@@ -13,7 +13,3 @@
 	font: inherit;
 	margin-top: -1px;
 }
-
-.terminal-prompt:after {
-	content: "\a0";
-}

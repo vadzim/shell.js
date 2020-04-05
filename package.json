@@ -38,7 +38,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "babel-plugin-macros": "^2.8.0",
+    "inspect.macro": "^0.0.0",
     "react-scripts": "3.4.1",
-    "typescript": "^3.9.0-beta"
+    "typescript": "^3.9.0-beta",
+    "using.macro": "^1.0.5"
   }
 }

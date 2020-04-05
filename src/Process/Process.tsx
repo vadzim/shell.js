@@ -11,8 +11,10 @@ export class Process<O = string | ArrayBuffer, I = string | ArrayBuffer, E = str
 	#stderrp: Writable
 	#resolve: (x: number) => void
 
-	constructor(cmd: string, _resolve = (x: number) => {}) {
+	constructor(cmd: string) {
 		super(resolve => { _resolve = resolve })
+		// using `var` is a workaround. Typescript allows neither to assign `this.#resolve` within the callback nor to declare `let` variables before super is called.
+		var _resolve: any
 		this.#resolve = _resolve
 
 		const stdin = new PassThrough()

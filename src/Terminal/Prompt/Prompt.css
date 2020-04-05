@@ -1,0 +1,3 @@
+.terminal-prompt:after {
+	content: "\a0";
+}

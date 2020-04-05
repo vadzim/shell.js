@@ -1,10 +1,9 @@
 import React from 'react'
 import { uid } from 'react-uid'
-import { spawn, Process } from '../Process'
+import { spawn, Process } from 'Process'
 import { ProcessOutput } from './ProcessOutput'
+import { Prompt } from './Prompt'
 import './Terminal.css'
-
-const Prompt = ({children = <></> as React.ReactNode}) => <>{Boolean(children) && <span className='terminal-prompt'>{children}</span>}</>
 
 export const Terminal = ({
 	prompt = '>' as string,
