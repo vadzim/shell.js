@@ -13,13 +13,11 @@ export const ProcessOutput = React.memo<{ process: Process }>(({ process }) => {
 			const containerRef = container.current
 
 			const onData = (data: unknown) => {
-				const text = String(data)
-				output.appendChild(render(text))
+				output.appendChild(render(<TextLine text={String(data)} />))
 			}
 
 			const onErrorData = (error: unknown) => {
-				const text = (error as any)?.message ?? String(error)
-				output.appendChild(render(<span className="terminal-process-output__error">{text}</span>))
+				output.appendChild(render(<TextLine className="terminal-process-output__error" text={(error as any)?.message ?? String(error)} />))
 			}
 
 			process.onData(onData)
@@ -38,3 +36,13 @@ export const ProcessOutput = React.memo<{ process: Process }>(({ process }) => {
 
 	return <div className="terminal-process-output" ref={container} />
 })
+
+const TextLine = ({ className = undefined as string | undefined, text = '' as string }) => {
+	const { main, end } = text.match(/^(?<main>.*?)(?<end>\n?)$/s)?.groups ?? {}
+	return (
+		<>
+			{className ? <span className={className}>{main}</span> : main}
+			<span className={className}>{end}</span>
+		</>
+	)
+}

@@ -2,7 +2,8 @@
 	white-space: pre-line;
 }
 
-.terminal-process-output__loading::after {
+.terminal-process-output__loading:empty::after,
+.terminal-process-output__loading > span:last-child::before {
 	content: " ";
 	display: inline-block;
 	width: 1em;
